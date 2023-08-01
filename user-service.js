@@ -1,20 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken')
-const passport = require('passport')
-const passportJWT = require('passport-jwt')
 
-const JWTStrategy = passportJWT.Strategy
-const ExtractJWT = passportJWT.ExtractJwt
-
-const jwtOptions = {
-    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey: process.env.JWT_SECRET
-}
-
-passport.use(new JWTStrategy(jwtOptions, (jwtPayload, done) => {
-    return done(null, jwtPayload)
-}))
 
 let mongoDBConnectionString = process.env.MONGO_URL;
 
@@ -190,5 +176,3 @@ module.exports.removeHistory = function (id, historyId) {
             })
     });
 }
-
-module.exports.protectRoutes = passport.authenticate('jwt', {session: false})
