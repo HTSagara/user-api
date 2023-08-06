@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-
 let mongoDBConnectionString = process.env.MONGO_URL;
 
 let Schema = mongoose.Schema;
@@ -105,7 +104,7 @@ module.exports.addFavourite = function (id, favId) {
                     .then(user => { resolve(user.favourites); })
                     .catch(err => { reject(`Unable to update favourites for user with id: ${id}`); })
             } else {
-                reject(`Unable to update favourites for user with id: ${id}`);
+                reject(`Unable to update favourites for user with id: ${id} you hsve reach the max of 50`);
             }
 
         })
